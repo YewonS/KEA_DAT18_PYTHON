@@ -52,29 +52,19 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 
+def cutStringInHalf(s):
+
+  half = int((len(s) + 1) / 2)
+  sArr = [s[:half], s[half:]]
+  
+  return sArr
+
 def front_back(a, b):
 
-  if len(a) % 2 == 0:
-    half = int(len(a) / 2)
-    aFront = a[:half]
-    aBack = a[half:]
-  else:
-    half = int(len(a) / 2 + 1)
-    aFront = a[:half]
-    aBack = a[half:]
+  aArr = cutStringInHalf(a)
+  bArr = cutStringInHalf(b)
 
-  if len(b) % 2 == 0:
-      half = int(len(b) / 2)
-      bFront = b[:half]
-      bBack = b[half:]
-  else:
-      half = int(len(b) / 2 + 1)
-      bFront = b[:half]
-      bBack = b[half:]
-
-  return aFront + bFront + aBack + bBack
-  
-# TODO: find a better way to solve this...
+  return aArr[0] + bArr[0] + aArr[1] + bArr[1]
 
 
 # Simple provided test() function used in main() to print
