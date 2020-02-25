@@ -24,7 +24,7 @@ Optional: define a helper function to avoid code duplication inside
 print_words() and print_top().
 """
 import sys
-import re
+import re # regular expression operations
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
