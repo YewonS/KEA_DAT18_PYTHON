@@ -6,12 +6,17 @@
 
 import os, requests, subprocess
 
-if os.path.exists('google.html'):
-    pass
+print("Type in the name of the webpage: ")
+url = input()
+
+if os.path.exists(f'{url}.html'):
+    print("The page is already downloaded.")
 else:   
-    r = requests.get("https://www.google.com").text()
-    newFile = open('google.html', 'w+')
+    r = requests.get(f'https://www.{url}.com')
+    r = r.text
+    newFile = open(f'{url}.html', 'w+')
     newFile.write(r)
+    print('operation succeed. you can go home now')
 
 
 
