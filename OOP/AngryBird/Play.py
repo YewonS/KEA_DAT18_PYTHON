@@ -1,74 +1,74 @@
-# import Board
+from random import randint
 
 class Play():
 
-    x, y = 0, 0
-    bP = []
-    pP = []
 
-    
-    w, h = 8, 8
-
-    def printBoard(self, bP, pP):
-    
-        matrix = [['*' for x in range(w)] for y in range(h)] 
-
-        matrix[bPx][bPy] = 'B'
-        matrix[pPx][pPy] = 'P'
-
-        for x in range(w):
-            print(matrix[x])
+    def __init__(self):
+        x, y = 0, 0
+        bP = []
+        pP = []
 
     def generatePosition(self):
 
         positionsNo = []
 
         for r in range(4):
-            positionsNo.append(random.randint(0,7))
+            positionsNo.append(randint(0,7))
         
-        bP = [positionsNo[0], positionsNo[1]]
-        pP = [positionsNo[2], positionsNo[3]]
+        self.bP = [positionsNo[0], positionsNo[1]]
+        self.pP = [positionsNo[2], positionsNo[3]]
 
-    def makeMove(self, bP):
+    def printBoard(self):
+    
+        self.generatePosition()
 
-        x = bP[0]
-        y = bP[1]
+        w, h = 8, 8
 
-        switcher={
-            'f': y + 1,
+        matrix = [['*' for x in range(w)] for y in range(h)] 
+
+        matrix[self.bP[0]][self.bP[1]] = 'B'
+        matrix[self.pP[0]][self.pP[1]] = 'P'
+
+        for x in range(w):
+            print(matrix[x])
+
+    def makeMove(self):
+
+        x = self.bP[0]
+        y = self.bP[1]
+
+        switcher = {
+            'u': y + 1,
             'r': x + 1,
             'l': x - 1,
-            'b': y - 1
+            'd': y - 1
         }
-        bp = [x, y]
-        return switcher.get(bp)
+        self.bp = [x, y]
+        return switcher.get(self.bp)
     
-    def calculateResult(self, bP, pP):
-        if(bP == pP):
+    def calculateResult(self):
+        if(self.bP == self.pP):
             print("You won!")
         else:
-            print(f"You lost. Bird position: {bP[0]}, {bP[1]} vs Pig position: {pP[0]}, {pP[1]}.")
-        
-        
+            print(f"You lost. Bird position: {self.bP[0]}, {self.bP[1]} vs Pig position: {self.pP[0]}, {self.pP[1]}.")
 
 
+playObject = Play()
 
-    print("--------Angry Bird Game--------")
-    print("-------------------------------")
+print("--------Angry Bird Game--------")
+print("-------------------------------")
 
-    generatePosition()
+playObject.printBoard()
 
-    printBoard(bP, pP)
+print("-------------------------------")
+# print(f"Position of Bird: {bP[0]}, {bP[1]}. Position of Pig: {pP[0]}, {pP[1]}")
+print("Type in 'u' for up, 'r' for right, 'l' for left, 'd' for down. Type 'f' when you finished.")
 
-    print("-------------------------------")
-    print(f"Position of Bird: {bP[0]}, {bP[1]}. Position of Pig: {pP[0]}, {pP[1]}")
-    print("Type in 'f' for forward, 'r' for right turn, 'l' for left turn, 'b' for backward. Type 'f' when you finished.")
+userInput = input("Make your move: ").lower()
+while(userInput != 'f'):
+    playObject.makeMove()
 
-    userInput = input("Make your move: ").lower()
-    while(userInput != 'f'):
-        makeMove(bP)
-    
-    calculateResult(bP, pP)
+playObject.calculateResult()
 
     
 
