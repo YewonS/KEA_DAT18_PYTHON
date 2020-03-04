@@ -2,7 +2,6 @@ from random import randint
 
 class Play():
 
-
     def __init__(self):
         x, y = 0, 0
         bP = []
@@ -32,19 +31,20 @@ class Play():
         for x in range(w):
             print(matrix[x])
 
-    def makeMove(self):
+    def makeMove(self, userInput):
 
-        x = self.bP[0]
-        y = self.bP[1]
+        if userInput == 'd':
+            self.bP[0] += 1
+        elif userInput == 'r':
+            self.bP[1] += 1
+        elif userInput == 'l':
+            self.bP[1] -= 1
+        elif userInput == 'u':
+            self.bP[0] -= 1
 
-        switcher = {
-            'u': y + 1,
-            'r': x + 1,
-            'l': x - 1,
-            'd': y - 1
-        }
-        self.bp = [x, y]
-        return switcher.get(self.bp)
+        print(f'Current bird position: ({self.bP[0]}, {self.bP[1]})')
+        print(f'Current pig position: ({self.pP[0]}, {self.pP[1]})')
+        return self.bP
     
     def calculateResult(self):
         if(self.bP == self.pP):
@@ -61,12 +61,13 @@ print("-------------------------------")
 playObject.printBoard()
 
 print("-------------------------------")
-# print(f"Position of Bird: {bP[0]}, {bP[1]}. Position of Pig: {pP[0]}, {pP[1]}")
 print("Type in 'u' for up, 'r' for right, 'l' for left, 'd' for down. Type 'f' when you finished.")
 
-userInput = input("Make your move: ").lower()
-while(userInput != 'f'):
-    playObject.makeMove()
+finishGame = 'f'
+userInput = ''
+while(userInput != finishGame):
+    userInput = input("Make your move: ").lower()
+    playObject.makeMove(userInput)
 
 playObject.calculateResult()
 
