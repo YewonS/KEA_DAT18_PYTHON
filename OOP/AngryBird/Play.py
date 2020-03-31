@@ -70,6 +70,3 @@ while(userInput != finishGame):
     playObject.makeMove(userInput)
 
 playObject.calculateResult()
-
-    
-
